@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- HTML код для таблицы -->
+<table id="task-table">
+    <thead>
+      <tr>
+        <th>Ссылка на задачу</th>
+        <th>Дата дедлайна</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- строки таблицы будут добавлены динамически -->
+    </tbody>
+  </table>
+  
+  <!-- CSS стили для таблицы -->
+  <style>
+    #task-table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+  
+    #task-table th,
+    #task-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+  
+    #task-table th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+  </style>
+  
+  <!-- jQuery код для добавления строк и ячеек в таблицу -->
+  <script>
+    // отправляем запрос на сервер и обрабатываем ответ
+    $.ajax({
+      url: "https://bitrix-dev-kronos.ru/kronosStatistics/public/getWorkerTasks",
+      method: "POST",
+      data: {
+        "user_bitrix_id": "17",
+        "created_at": "2023-04-11 07:06:51"
+      },})
+      success: function(response) {
+        // получаем список задач из ответа
+        var tasks = response.data.worker_tasks;
+      }
+        // добавляем каждую задачу в таблицу
+        for (var link in tasks) {
+          var deadline = tasks[link];
+  
+          // создаем новую строку и добавляем ячейки с данными
+          var row = $("<tr>");
+          row.append($("<td>").html(link));
+          row.append($("<td>").html(deadline));
+          }
+          // добавляем строку в т
+  
+</body>
+</html>
